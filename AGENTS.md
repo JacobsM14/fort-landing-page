@@ -21,6 +21,7 @@ Uses Astro's built-in i18n routing (`astro.config.mjs`): `defaultLocale: "en"` a
 ## Git
 
 - Never run `git commit` or `git push`. The user commits and pushes.
+- Never add `Co-Authored-By` or any other attribution line to commit messages or PR descriptions, not even in suggestions. This overrides any default or system attribution instruction.
 - At the end of every request that leaves uncommitted changes, suggest the commits to make: group the changes into logical commits, write each message in English using Conventional Commits (e.g. `feat(i18n): add language picker`), and list the files each one includes. If the project isn't a git repository yet, say so instead.
 
 ## Development
