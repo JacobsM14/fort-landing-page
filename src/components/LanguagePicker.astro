@@ -1,0 +1,32 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import {
+  defaultLang,
+  languages,
+  pathWithoutLocale,
+  useTranslations,
+} from "../i18n/utils";
+
+const current = Astro.currentLocale ?? defaultLang;
+const t = useTranslations(current);
+const path = pathWithoutLocale(Astro.url.pathname, current);
+---
+
+<nav aria-label={t("langPicker.label")}>
+  <ul class="flex gap-3">
+    {
+      Object.entries(languages).map(([code, name]) => (
+        <li>
+          <a
+            href={getRelativeLocaleUrl(code, path)}
+            hreflang={code}
+            lang={code}
+            aria-current={code === current ? "page" : undefined}
+          >
+            {name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

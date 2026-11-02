@@ -1,0 +1,9 @@
+---
+import { useTranslations } from "../i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
+---
+
+<main>
+  <h1>{t("home.heading")}</h1>
+</main>
