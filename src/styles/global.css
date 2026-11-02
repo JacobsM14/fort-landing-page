@@ -19,6 +19,8 @@
   --color-pink: #ff5c9a;
   --color-yellow: #ffc23d;
 
+  --radius: 4px;
+
   --animate-fade-in: fade-in 150ms ease-out;
 
   @keyframes fade-in {

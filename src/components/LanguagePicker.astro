@@ -15,7 +15,7 @@ const path = pathWithoutLocale(Astro.url.pathname, current);
 
 <details data-language-picker class="group relative">
   <summary
-    class="flex cursor-pointer list-none items-center gap-2 rounded-lg border border-border/40 bg-bg-dark px-3 py-1.5 text-sm text-text transition-colors hover:border-border [&::-webkit-details-marker]:hidden"
+    class="flex cursor-pointer list-none items-center gap-2 rounded border border-border/40 bg-bg-dark px-3 py-1.5 text-sm text-text transition-colors hover:border-border [&::-webkit-details-marker]:hidden"
   >
     <span class="sr-only">{t("langPicker.label")}:</span>
     {languages[current]}
@@ -35,7 +35,7 @@ const path = pathWithoutLocale(Astro.url.pathname, current);
   </summary>
 
   <ul
-    class="absolute right-0 top-full z-10 mt-2 min-w-36 rounded-xl border border-border/40 bg-bg-dark-secondary p-1 shadow-lg shadow-black/40 group-open:animate-fade-in"
+    class="absolute right-0 top-full z-10 mt-2 min-w-36 rounded border border-border/40 bg-bg-dark-secondary p-1 shadow-lg shadow-black/40 group-open:animate-fade-in"
   >
     {
       Object.entries(languages).map(([code, name]) => (
@@ -46,7 +46,7 @@ const path = pathWithoutLocale(Astro.url.pathname, current);
             lang={code}
             aria-current={code === current ? "page" : undefined}
             class:list={[
-              "block rounded-lg px-3 py-2 text-sm transition-colors hover:bg-bg-dark hover:text-text",
+              "block rounded-xs px-3 py-2 text-sm transition-colors hover:bg-bg-dark hover:text-text",
               code === current ? "text-text" : "text-disabled",
             ]}
           >

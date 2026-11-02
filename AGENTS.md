@@ -14,6 +14,7 @@ Uses Astro's built-in i18n routing (`astro.config.mjs`): `defaultLocale: "en"` a
 ## Code style
 
 - Follow the Astro docs patterns and the existing code. TypeScript is strict (`astro/tsconfigs/strict`).
+- Use the theme tokens from `src/styles/global.css` for colors and radius. The default border radius is 4px: use `rounded`, and `rounded-xs` for elements nested inside a padded rounded container.
 - Write semantic, accessible HTML: `lang`, `alt`, labels, and never block zoom.
 - Keep comments to a minimum, only when the reason behind the code isn't obvious. Comments are always in English.
 
