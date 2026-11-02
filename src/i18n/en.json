@@ -1,6 +1,10 @@
 {
-  "meta.title": "Fort",
+  "meta.title": "Fort: Gym Workout Tracker",
   "meta.description": "Fort — official website.",
+  "app.name": "Fort",
+  "app.tagline": "Gym Workout Tracker",
+  "nav.label": "Main",
+  "nav.home": "Home",
   "langPicker.label": "Language",
   "home.heading": "Fort"
 }

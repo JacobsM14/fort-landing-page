@@ -1,6 +1,10 @@
 {
-  "meta.title": "Fort",
+  "meta.title": "Fort: Rutinas de Gimnasio",
   "meta.description": "Fort — sitio web oficial.",
+  "app.name": "Fort",
+  "app.tagline": "Rutinas de Gimnasio",
+  "nav.label": "Principal",
+  "nav.home": "Inicio",
   "langPicker.label": "Idioma",
   "home.heading": "Fort"
 }

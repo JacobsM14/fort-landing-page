@@ -3,16 +3,36 @@
 @theme inline {
   --font-sans: var(--font-instrument-sans);
   --font-mono: var(--font-jetbrains-mono);
+  --color-accent: var(--color-orange);
 }
 
 @theme {
   --color-bg-dark: #0c0c0d;
   --color-bg-dark-secondary: #161618;
+  --color-text: #F2F2F0;
+  --color-disabled: #A0A0A8;
+  --color-border: #6A6A72;
   --color-orange: #ff6a3d;
   --color-blue: #4d9fff;
   --color-green: #3dd68c;
   --color-purple: #a98bff;
   --color-pink: #ff5c9a;
   --color-yellow: #ffc23d;
+
+  --animate-fade-in: fade-in 150ms ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      translate: 0 -4px;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+  }
 }
 

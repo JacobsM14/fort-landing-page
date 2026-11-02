@@ -1,0 +1,53 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import LanguagePicker from "./LanguagePicker.astro";
+import { defaultLang, useTranslations, type UIKey } from "../i18n/utils";
+
+const lang = Astro.currentLocale ?? defaultLang;
+const t = useTranslations(lang);
+
+const navItems: { label: UIKey; path: string }[] = [
+  { label: "nav.home", path: "/" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  class="mx-auto mt-6 flex w-9/12 items-center justify-between gap-6 rounded-2xl border border-border/40 bg-bg-dark-secondary px-6 py-3 text-text"
+>
+  <a href={getRelativeLocaleUrl(lang)} class="flex items-center gap-3">
+    <span class="flex flex-col leading-tight">
+      <span class="text-xl font-bold">{t("app.name")}</span>
+      <span class="text-xs text-accent font-mono">{t("app.tagline")}</span>
+    </span>
+  </a>
+
+  <div class="flex items-center gap-6">
+    <nav aria-label={t("nav.label")}>
+      <ul class="flex items-center gap-6">
+        {
+          navItems.map(({ label, path }) => {
+            const href = getRelativeLocaleUrl(lang, path);
+            const isCurrent = href === currentPath;
+            return (
+              <li>
+                <a
+                  href={href}
+                  aria-current={isCurrent ? "page" : undefined}
+                  class:list={[
+                    "transition-colors hover:text-text",
+                    isCurrent ? "text-text" : "text-disabled",
+                  ]}
+                >
+                  {t(label)}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </nav>
+    <LanguagePicker />
+  </div>
+</header>

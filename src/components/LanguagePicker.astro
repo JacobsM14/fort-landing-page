@@ -2,18 +2,41 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import {
   defaultLang,
+  isLang,
   languages,
   pathWithoutLocale,
   useTranslations,
 } from "../i18n/utils";
 
-const current = Astro.currentLocale ?? defaultLang;
+const current = isLang(Astro.currentLocale) ? Astro.currentLocale : defaultLang;
 const t = useTranslations(current);
 const path = pathWithoutLocale(Astro.url.pathname, current);
 ---
 
-<nav aria-label={t("langPicker.label")}>
-  <ul class="flex gap-3">
+<details data-language-picker class="group relative">
+  <summary
+    class="flex cursor-pointer list-none items-center gap-2 rounded-lg border border-border/40 bg-bg-dark px-3 py-1.5 text-sm text-text transition-colors hover:border-border [&::-webkit-details-marker]:hidden"
+  >
+    <span class="sr-only">{t("langPicker.label")}:</span>
+    {languages[current]}
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 16 16"
+      class="size-3 text-disabled transition-transform group-open:rotate-180"
+    >
+      <path
+        d="M4 6l4 4 4-4"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+  </summary>
+
+  <ul
+    class="absolute right-0 top-full z-10 mt-2 min-w-36 rounded-xl border border-border/40 bg-bg-dark-secondary p-1 shadow-lg shadow-black/40 group-open:animate-fade-in"
+  >
     {
       Object.entries(languages).map(([code, name]) => (
         <li>
@@ -22,6 +45,10 @@ const path = pathWithoutLocale(Astro.url.pathname, current);
             hreflang={code}
             lang={code}
             aria-current={code === current ? "page" : undefined}
+            class:list={[
+              "block rounded-lg px-3 py-2 text-sm transition-colors hover:bg-bg-dark hover:text-text",
+              code === current ? "text-text" : "text-disabled",
+            ]}
           >
             {name}
           </a>
@@ -29,4 +56,20 @@ const path = pathWithoutLocale(Astro.url.pathname, current);
       ))
     }
   </ul>
-</nav>
+</details>
+
+<script>
+  document
+    .querySelectorAll<HTMLDetailsElement>("[data-language-picker]")
+    .forEach((picker) => {
+      document.addEventListener("click", (event) => {
+        if (!picker.contains(event.target as Node)) picker.open = false;
+      });
+
+      picker.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape" || !picker.open) return;
+        picker.open = false;
+        picker.querySelector("summary")?.focus();
+      });
+    });
+</script>
