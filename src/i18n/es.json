@@ -6,5 +6,8 @@
   "nav.label": "Principal",
   "nav.home": "Inicio",
   "langPicker.label": "Idioma",
-  "home.heading": "Fort"
+  "hero.eyebrow": "Registro de entrenos · Offline",
+  "hero.title": "Tu cuaderno de gimnasio, sin ruido.",
+  "hero.description": "Prepara tus rutinas una vez, elige la que toque cada día y apunta cada serie al momento. Todo se guardará en tu móvil, aunque no tengas conexión.",
+  "hero.screenshotAlt": "Fort registrando las series de press de banca en un entreno de pecho"
 }

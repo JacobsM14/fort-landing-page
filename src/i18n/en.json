@@ -6,5 +6,8 @@
   "nav.label": "Main",
   "nav.home": "Home",
   "langPicker.label": "Language",
-  "home.heading": "Fort"
+  "hero.eyebrow": "Workout log · Offline",
+  "hero.title": "Your gym notebook, without the noise.",
+  "hero.description": "Set up your routines once, pick the one for each day and log every set as you go. Everything is saved on your phone, even without a connection.",
+  "hero.screenshotAlt": "Fort logging the sets of a bench press during a chest day workout"
 }

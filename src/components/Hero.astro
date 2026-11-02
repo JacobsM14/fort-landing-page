@@ -1,0 +1,65 @@
+---
+import { Image } from "astro:assets";
+import enWorkout from "../assets/en_workout.webp";
+import esWorkout from "../assets/es_workout.webp";
+import {
+  defaultLang,
+  isLang,
+  useTranslations,
+  type Lang,
+} from "../i18n/utils";
+
+const lang = isLang(Astro.currentLocale) ? Astro.currentLocale : defaultLang;
+const t = useTranslations(lang);
+
+const screenshots: Record<Lang, ImageMetadata> = {
+  en: enWorkout,
+  es: esWorkout,
+};
+
+const corners = [
+  "top-0 left-0 border-t-2 border-l-2",
+  "top-0 right-0 border-t-2 border-r-2",
+  "bottom-0 left-0 border-b-2 border-l-2",
+  "bottom-0 right-0 border-b-2 border-r-2",
+];
+---
+
+<section
+  aria-labelledby="hero-title"
+  class="grid items-center gap-12 py-16 md:grid-cols-[1fr_auto]"
+>
+  <div class="flex flex-col gap-7">
+    <p class="font-mono text-[13px] tracking-[1px] text-accent uppercase">
+      {t("hero.eyebrow")}
+    </p>
+    <h1
+      id="hero-title"
+      class="text-5xl leading-[1.05] text-text md:text-6xl lg:text-[84px] font-bold"
+    >
+      {t("hero.title")}
+    </h1>
+    <p class="max-w-xl text-[19px] text-disabled">
+      {t("hero.description")}
+    </p>
+  </div>
+
+  <div class="relative mx-auto px-12 py-9">
+    {
+      corners.map((position) => (
+        <span
+          aria-hidden="true"
+          class:list={["absolute size-6 border-accent", position]}
+        />
+      ))
+    }
+    <Image
+      src={screenshots[lang]}
+      alt={t("hero.screenshotAlt")}
+      width={290}
+      densities={[1, 2]}
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+</section>
