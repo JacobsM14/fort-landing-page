@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme inline {
+  --font-sans: var(--font-instrument-sans);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
 @theme {
   --color-bg-dark: #0c0c0d;
   --color-bg-dark-secondary: #161618;
@@ -10,3 +15,4 @@
   --color-pink: #ff5c9a;
   --color-yellow: #ffc23d;
 }
+

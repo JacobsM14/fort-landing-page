@@ -1,4 +1,5 @@
 ---
+import { Font } from "astro:assets";
 import { getAbsoluteLocaleUrl } from "astro:i18n";
 import LanguagePicker from "../components/LanguagePicker.astro";
 import {
@@ -29,6 +30,8 @@ const path = pathWithoutLocale(Astro.url.pathname, lang);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+    <Font cssVariable="--font-instrument-sans" preload />
+    <Font cssVariable="--font-jetbrains-mono" />
     <title>{title}</title>
     <meta name="description" content={description} />
     {
@@ -51,7 +54,7 @@ const path = pathWithoutLocale(Astro.url.pathname, lang);
       )
     }
   </head>
-  <body class="min-h-screen bg-bg-dark">
+  <body class="min-h-screen bg-bg-dark font-sans">
     <header class="flex justify-end p-4">
       <LanguagePicker />
     </header>
