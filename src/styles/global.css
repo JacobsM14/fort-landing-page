@@ -100,6 +100,25 @@
   }
 }
 
+/* Without scroll timeline support the animation would jump straight to its end state. */
+@utility shrink-on-scroll {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: scroll()) {
+      animation-name: shrink-on-scroll;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root);
+      animation-range: 0 80px;
+    }
+  }
+}
+
+@keyframes shrink-on-scroll {
+  to {
+    scale: 0.9;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0s !important;
