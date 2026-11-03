@@ -41,7 +41,6 @@
     0 0 80px -20px color-mix(in oklab, var(--glow-color) 60%, transparent)
   );
 
-  /* Negative z-index without isolation keeps the grid under the box's own background. */
   &::before {
     content: "";
     position: absolute;
@@ -78,7 +77,6 @@
   }
 }
 
-/* Use with `glow`: moves the light and the grid under the element's bottom edge, behind its content. */
 @utility glow-bottom {
   --glow-shadow: none;
   --glow-mask: radial-gradient(
