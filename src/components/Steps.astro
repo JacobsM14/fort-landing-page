@@ -1,0 +1,115 @@
+---
+import { Image } from "astro:assets";
+import enNewRoutine from "../assets/screenshots/en/new_routine.webp";
+import enProgress from "../assets/screenshots/en/progress.webp";
+import enRoutineDone from "../assets/screenshots/en/routine_done.webp";
+import esNewRoutine from "../assets/screenshots/es/new_routine.webp";
+import esProgress from "../assets/screenshots/es/progress.webp";
+import esRoutineDone from "../assets/screenshots/es/routine_done.webp";
+import planImage from "../assets/photos/plan.webp";
+import progressImage from "../assets/photos/progress.webp";
+import trainImage from "../assets/photos/train.webp";
+import {
+  defaultLang,
+  isLang,
+  useTranslations,
+  type Lang,
+  type UIKey,
+} from "../i18n/utils";
+
+const lang = isLang(Astro.currentLocale) ? Astro.currentLocale : defaultLang;
+const t = useTranslations(lang);
+
+const steps: {
+  image: ImageMetadata;
+  screenshot: Record<Lang, ImageMetadata>;
+  title: UIKey;
+  description: UIKey;
+  alt: UIKey;
+  screenshotAlt: UIKey;
+}[] = [
+  {
+    image: planImage,
+    screenshot: { en: enNewRoutine, es: esNewRoutine },
+    title: "steps.plan.title",
+    description: "steps.plan.description",
+    alt: "steps.plan.imageAlt",
+    screenshotAlt: "steps.plan.screenshotAlt",
+  },
+  {
+    image: trainImage,
+    screenshot: { en: enRoutineDone, es: esRoutineDone },
+    title: "steps.train.title",
+    description: "steps.train.description",
+    alt: "steps.train.imageAlt",
+    screenshotAlt: "steps.train.screenshotAlt",
+  },
+  {
+    image: progressImage,
+    screenshot: { en: enProgress, es: esProgress },
+    title: "steps.progress.title",
+    description: "steps.progress.description",
+    alt: "steps.progress.imageAlt",
+    screenshotAlt: "steps.progress.screenshotAlt",
+  },
+];
+
+const screenshotClasses = [
+  "absolute top-8 left-0 w-[85%] origin-bottom -translate-x-1/3 -rotate-12 md:-translate-x-[55%]",
+  "relative z-10 w-full",
+  "absolute top-8 right-0 w-[85%] origin-bottom translate-x-1/3 rotate-12 md:translate-x-[55%]",
+];
+---
+
+<section
+  aria-labelledby="steps-title"
+  class="mt-24 grid items-center gap-12 py-16 md:mt-40 lg:grid-cols-[1fr_minmax(0,22rem)]"
+>
+  <div class="flex flex-col gap-4 lg:col-span-2">
+    <p class="font-mono text-[13px] tracking-[1px] text-accent uppercase">
+      {t("steps.eyebrow")}
+    </p>
+    <h2 id="steps-title" class="text-3xl font-bold text-text md:text-4xl">
+      {t("steps.title")}
+    </h2>
+  </div>
+
+  <div class="relative mx-auto w-56 md:w-72">
+    {
+      steps.map(({ screenshot, screenshotAlt }, index) => (
+        <Image
+          src={screenshot[lang]}
+          alt={t(screenshotAlt)}
+          width={288}
+          densities={[1, 2]}
+          class:list={["drop-shadow-2xl", screenshotClasses[index]]}
+        />
+      ))
+    }
+  </div>
+
+  <ol class="mx-auto flex w-full max-w-sm flex-col gap-4 lg:max-w-none">
+    {
+      steps.map(({ image, title, description, alt }, index) => (
+        <li class="flex flex-col gap-4 rounded border border-border/40 bg-bg-dark-secondary p-1.5 pb-5">
+          <Image
+            src={image}
+            alt={t(alt)}
+            widths={[400, 800]}
+            sizes="(min-width: 640px) 384px, 100vw"
+            class="aspect-[4/1] w-full rounded-xs object-cover"
+          />
+          <div class="flex flex-col gap-1.5 px-3">
+            <h3 class="flex items-baseline gap-2 text-lg font-bold text-text">
+              <span class="font-mono text-xs text-accent" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              {t(title)}
+            </h3>
+            <p class="text-sm text-disabled">{t(description)}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</section>

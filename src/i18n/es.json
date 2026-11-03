@@ -9,5 +9,19 @@
   "hero.eyebrow": "Registro de entrenos · Offline",
   "hero.title": "Tu cuaderno de gimnasio, sin ruido.",
   "hero.description": "Prepara tus rutinas una vez, elige la que toque cada día y apunta cada serie al momento. Todo se guardará en tu móvil, aunque no tengas conexión.",
-  "hero.screenshotAlt": "Fort registrando las series de press de banca en un entreno de pecho"
+  "hero.screenshotAlt": "Fort registrando las series de press de banca en un entreno de pecho",
+  "steps.eyebrow": "Cómo funciona",
+  "steps.title": "Planea. Entrena. Mira tu progreso.",
+  "steps.plan.title": "Planea tu rutina",
+  "steps.plan.description": "Prepara tus rutinas una vez con los ejercicios, series y repeticiones que quieras. Las tendrás listas para cada sesión.",
+  "steps.plan.imageAlt": "Una persona con camiseta negra mirando el móvil en el gimnasio",
+  "steps.plan.screenshotAlt": "Pantalla de nueva rutina de Fort con una rutina de pecho y seis ejercicios",
+  "steps.train.title": "Ponte a entrenar",
+  "steps.train.description": "Elige la rutina de hoy y apunta cada serie al terminarla. No tienes que hacer nada más.",
+  "steps.train.imageAlt": "Un estante de mancuernas alineadas en un gimnasio",
+  "steps.train.screenshotAlt": "Resumen de entreno de Fort con la duración, los ejercicios y las series de un día de pecho terminado",
+  "steps.progress.title": "Sigue tu progreso",
+  "steps.progress.description": "Consulta los pesos y repeticiones de cada ejercicio a lo largo del tiempo, y corrige cualquier serie pasada si lo necesitas.",
+  "steps.progress.imageAlt": "Primer plano de las placas de peso de una máquina de gimnasio",
+  "steps.progress.screenshotAlt": "Pantalla de progreso de Fort con una gráfica del 1RM estimado del press de banca"
 }
