@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import enProgress from "../assets/screenshots/en/progress.webp";
 import esProgress from "../assets/screenshots/es/progress.webp";
 import { defaultLang, isLang, useTranslations, type Lang } from "../i18n/utils";
+import DownloadButton from "./DownloadButton.astro";
 
 const lang = isLang(Astro.currentLocale) ? Astro.currentLocale : defaultLang;
 const t = useTranslations(lang);
@@ -11,14 +12,11 @@ const screenshots: Record<Lang, ImageMetadata> = {
   en: enProgress,
   es: esProgress,
 };
-
-// TODO: replace with the app's Google Play listing.
-const playStoreUrl = "";
 ---
 
 <section
   aria-labelledby="download-title"
-  class="relative mx-auto mt-8 grid max-w-4xl items-center gap-10 overflow-hidden rounded px-6 py-12 md:mt-12 md:grid-cols-[1fr_auto] md:px-14"
+  class="relative mx-auto mt-8 grid max-w-4xl items-center gap-10 overflow-hidden px-6 py-12 md:mt-12 md:grid-cols-[1fr_auto] md:px-14"
 >
   <svg
     aria-hidden="true"
@@ -27,11 +25,10 @@ const playStoreUrl = "";
     <rect
       width="100%"
       height="100%"
-      rx="4"
       fill="none"
       stroke="currentColor"
       stroke-width="2"
-      stroke-dasharray="24 16"></rect>
+      stroke-dasharray="27 16"></rect>
   </svg>
 
   <div class="flex flex-col items-start gap-6">
@@ -44,12 +41,7 @@ const playStoreUrl = "";
     <p class="max-w-md text-[19px] text-disabled">
       {t("download.description")}
     </p>
-    <a
-      href={playStoreUrl}
-      class="mt-2 w-full rounded bg-accent px-6 py-4 text-center font-bold md:w-auto md:px-10 md:text-lg text-bg-dark transition-colors hover:bg-accent/85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-    >
-      {t("download.cta")}
-    </a>
+    <DownloadButton class="mt-2" />
   </div>
 
   <div class="mx-auto w-44 hidden md:w-56 md:block">

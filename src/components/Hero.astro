@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import enWorkout from "../assets/screenshots/en/workout.webp";
 import esWorkout from "../assets/screenshots/es/workout.webp";
 import { defaultLang, isLang, useTranslations, type Lang } from "../i18n/utils";
+import DownloadButton from "./DownloadButton.astro";
 
 const lang = isLang(Astro.currentLocale) ? Astro.currentLocale : defaultLang;
 const t = useTranslations(lang);
@@ -37,6 +38,7 @@ const corners = [
     <p class="max-w-xl text-[19px] text-disabled">
       {t("hero.description")}
     </p>
+    <DownloadButton class="md:self-start" />
   </div>
 
   <div class="glow mx-auto">
