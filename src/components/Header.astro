@@ -1,5 +1,6 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
+import Logo from "../assets/logo.svg";
 import LanguagePicker from "./LanguagePicker.astro";
 import { defaultLang, useTranslations, type UIKey } from "../i18n/utils";
 
@@ -18,7 +19,7 @@ const currentPath = Astro.url.pathname;
     class="flex origin-top items-center justify-between gap-6 rounded border border-border/40 bg-bg-dark-secondary/60 px-6 py-3 text-text backdrop-blur-md backdrop-saturate-150 shrink-on-scroll"
   >
     <a href={getRelativeLocaleUrl(lang)} class="flex items-center gap-3">
-      <img src="/favicon.svg" alt={t("app.name")} class="h-8 w-8" />
+      <Logo role="img" aria-label={t("app.name")} class="size-8" />
       <span class="flex flex-col leading-tight">
         <span class="text-xl font-bold">{t("app.name")}</span>
         <span class="text-xs text-accent font-mono">{t("app.tagline")}</span>
