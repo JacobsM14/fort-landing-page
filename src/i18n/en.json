@@ -27,5 +27,10 @@
   "steps.progress.title": "Track your progress",
   "steps.progress.description": "Check the weights and reps of every exercise over time, and edit any past set if you need to.",
   "steps.progress.imageAlt": "Close-up of a weight stack on a gym machine",
-  "steps.progress.screenshotAlt": "Fort's progress screen with a chart of the estimated one-rep max of the bench press"
+  "steps.progress.screenshotAlt": "Fort's progress screen with a chart of the estimated one-rep max of the bench press",
+  "download.eyebrow": "Download · Android",
+  "download.title": "Start training with Fort",
+  "download.description": "Fort is only available on Google Play, for Android phones.",
+  "download.cta": "Get it on Google Play",
+  "download.screenshotAlt": "Fort's progress screen with a chart of the estimated one-rep max of the bench press"
 }
