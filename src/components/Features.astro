@@ -1,0 +1,22 @@
+---
+import { defaultLang, useTranslations, type UIKey } from "../i18n/utils";
+
+const t = useTranslations(Astro.currentLocale ?? defaultLang);
+
+const features: UIKey[] = [
+  "features.offline",
+  "features.exercises",
+  "features.customExercises",
+  "features.languages",
+];
+---
+
+<ul class="mt-14 grid grid-cols-2 gap-6 md:mt-22 md:grid-cols-4">
+  {
+    features.map((feature) => (
+      <li class="border-t border-disabled pt-4 font-mono text-[13px] text-disabled uppercase">
+        {t(feature)}
+      </li>
+    ))
+  }
+</ul>
