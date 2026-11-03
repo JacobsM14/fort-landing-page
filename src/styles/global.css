@@ -36,8 +36,10 @@
 @utility glow {
   --glow-color: var(--color-accent);
   position: relative;
-  box-shadow: 0 0 80px -20px
-    color-mix(in oklab, var(--glow-color) 60%, transparent);
+  box-shadow: var(
+    --glow-shadow,
+    0 0 80px -20px color-mix(in oklab, var(--glow-color) 60%, transparent)
+  );
 
   /* Negative z-index without isolation keeps the grid under the box's own background. */
   &::before {
@@ -47,7 +49,10 @@
     z-index: -1;
     pointer-events: none;
     opacity: 0.6;
-    mask-image: radial-gradient(closest-side, black, transparent);
+    mask-image: var(
+      --glow-mask,
+      radial-gradient(closest-side, black, transparent)
+    );
     background:
       radial-gradient(
         circle,
@@ -69,8 +74,31 @@
       50px 50px,
       25px 25px,
       25px 25px;
-    /* Anchors the grid to the viewport so every glow reveals the same grid. */
     background-attachment: fixed;
+  }
+}
+
+/* Use with `glow`: moves the light and the grid under the element's bottom edge, behind its content. */
+@utility glow-bottom {
+  --glow-shadow: none;
+  --glow-mask: radial-gradient(
+    ellipse 45% 160px at 50% calc(100% - 160px),
+    black,
+    transparent
+  );
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: auto -60px -80px;
+    height: 280px;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+      closest-side,
+      color-mix(in oklab, var(--glow-color) 35%, transparent),
+      transparent
+    );
   }
 }
 

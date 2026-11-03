@@ -74,7 +74,7 @@ const screenshotClasses = [
     </h2>
   </div>
 
-  <div class="relative mx-auto w-56 md:w-72">
+  <div class="glow glow-bottom mx-auto w-56 md:w-72">
     {
       steps.map(({ screenshot, screenshotAlt }, index) => (
         <Image
@@ -82,7 +82,7 @@ const screenshotClasses = [
           alt={t(screenshotAlt)}
           width={288}
           densities={[1, 2]}
-          class:list={["drop-shadow-2xl", screenshotClasses[index]]}
+          class:list={["block drop-shadow-2xl", screenshotClasses[index]]}
         />
       ))
     }
