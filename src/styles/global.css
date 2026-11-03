@@ -9,9 +9,9 @@
 @theme {
   --color-bg-dark: #0c0c0d;
   --color-bg-dark-secondary: #161618;
-  --color-text: #F2F2F0;
-  --color-disabled: #A0A0A8;
-  --color-border: #6A6A72;
+  --color-text: #f2f2f0;
+  --color-disabled: #a0a0a8;
+  --color-border: #6a6a72;
   --color-orange: #ff6a3d;
   --color-blue: #4d9fff;
   --color-green: #3dd68c;
@@ -33,10 +33,50 @@
   }
 }
 
+@utility glow {
+  --glow-color: var(--color-accent);
+  position: relative;
+  box-shadow: 0 0 80px -20px
+    color-mix(in oklab, var(--glow-color) 60%, transparent);
+
+  /* Negative z-index without isolation keeps the grid under the box's own background. */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -120px;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.6;
+    mask-image: radial-gradient(closest-side, black, transparent);
+    background:
+      radial-gradient(
+        circle,
+        transparent 20%,
+        var(--color-bg-dark) 20% 80%,
+        transparent 80%
+      ),
+      radial-gradient(
+          circle,
+          transparent 20%,
+          var(--color-bg-dark) 20% 80%,
+          transparent 80%
+        )
+        25px 25px,
+      linear-gradient(var(--glow-color) 2px, transparent 2px) 0 -1px,
+      linear-gradient(90deg, var(--glow-color) 2px, transparent 2px) -1px 0;
+    background-size:
+      50px 50px,
+      50px 50px,
+      25px 25px,
+      25px 25px;
+    /* Anchors the grid to the viewport so every glow reveals the same grid. */
+    background-attachment: fixed;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0s !important;
     transition-duration: 0s !important;
   }
 }
-
