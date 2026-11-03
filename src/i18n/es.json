@@ -32,5 +32,16 @@
   "download.title": "Empieza a entrenar con Fort",
   "download.description": "Fort solo está disponible en Google Play, para móviles Android.",
   "download.cta": "Descárgala en Google Play",
-  "download.screenshotAlt": "Pantalla de progreso de Fort con una gráfica del 1RM estimado del press de banca"
+  "download.screenshotAlt": "Pantalla de progreso de Fort con una gráfica del 1RM estimado del press de banca",
+  "footer.label": "Pie de página",
+  "footer.project": "Proyecto",
+  "footer.sourceCode": "Código fuente",
+  "footer.license": "Licencia",
+  "footer.privacy": "Privacidad",
+  "footer.author": "Autor",
+  "footer.portfolio": "Portfolio",
+  "footer.madeBy": "Hecho por",
+  "footer.github": "GitHub",
+  "footer.linkedin": "LinkedIn",
+  "footer.contact": "Contacto"
 }

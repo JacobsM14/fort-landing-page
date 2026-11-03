@@ -32,5 +32,16 @@
   "download.title": "Start training with Fort",
   "download.description": "Fort is only available on Google Play, for Android phones.",
   "download.cta": "Get it on Google Play",
-  "download.screenshotAlt": "Fort's progress screen with a chart of the estimated one-rep max of the bench press"
+  "download.screenshotAlt": "Fort's progress screen with a chart of the estimated one-rep max of the bench press",
+  "footer.label": "Footer",
+  "footer.project": "Project",
+  "footer.sourceCode": "Source code",
+  "footer.license": "License",
+  "footer.privacy": "Privacy",
+  "footer.author": "Author",
+  "footer.portfolio": "Portfolio",
+  "footer.madeBy": "Made by",
+  "footer.github": "GitHub",
+  "footer.linkedin": "LinkedIn",
+  "footer.contact": "Contact"
 }

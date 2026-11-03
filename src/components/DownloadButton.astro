@@ -1,5 +1,6 @@
 ---
 import { defaultLang, useTranslations } from "../i18n/utils";
+import { links } from "../links";
 
 interface Props {
   class?: string;
@@ -7,13 +8,10 @@ interface Props {
 
 const { class: className } = Astro.props;
 const t = useTranslations(Astro.currentLocale ?? defaultLang);
-
-// TODO: replace with the app's Google Play listing.
-const playStoreUrl = "";
 ---
 
 <a
-  href={playStoreUrl}
+  href={links.playStore}
   class:list={[
     "w-full rounded bg-accent px-6 py-4 text-center font-bold text-bg-dark transition-colors hover:bg-accent/85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent md:w-auto md:px-10 md:text-lg",
     className,

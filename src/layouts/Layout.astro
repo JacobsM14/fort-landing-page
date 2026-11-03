@@ -1,6 +1,7 @@
 ---
 import { Font } from "astro:assets";
 import { getAbsoluteLocaleUrl } from "astro:i18n";
+import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import {
   defaultLang,
@@ -59,5 +60,6 @@ const path = pathWithoutLocale(Astro.url.pathname, lang);
     <div class="overflow-x-clip">
       <slot />
     </div>
+    <Footer />
   </body>
 </html>
