@@ -14,10 +14,11 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header
-  class="sticky top-6 z-50 mx-auto mt-6 flex w-9/12 items-center justify-between gap-6 rounded border border-border/40 bg-bg-dark-secondary/60 px-6 backdrop-blur-md backdrop-saturate-150 py-3 text-text"
+  data-header
+  class="sticky top-6 z-50 mx-auto mt-6 flex w-9/12 origin-top items-center justify-between gap-6 rounded border border-border/40 bg-bg-dark-secondary/60 px-6 backdrop-blur-md backdrop-saturate-150 py-3 text-text transition-transform duration-300 ease-out data-scrolled:scale-90"
 >
   <a href={getRelativeLocaleUrl(lang)} class="flex items-center gap-3">
-    <img src="/favicon.svg" alt="" class="h-8 w-8" />
+    <img src="/favicon.svg" alt={t("app.name")} class="h-8 w-8" />
     <span class="flex flex-col leading-tight">
       <span class="text-xl font-bold">{t("app.name")}</span>
       <span class="text-xs text-accent font-mono">{t("app.tagline")}</span>
@@ -52,3 +53,14 @@ const currentPath = Astro.url.pathname;
     <LanguagePicker />
   </div>
 </header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-header]");
+
+  // Scaling doesn't change the layout height, so the content below doesn't jump.
+  const update = () =>
+    header?.toggleAttribute("data-scrolled", window.scrollY > 24);
+
+  update();
+  window.addEventListener("scroll", update, { passive: true });
+</script>
