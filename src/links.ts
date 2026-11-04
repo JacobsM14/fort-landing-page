@@ -5,9 +5,8 @@ export const links = {
   playStore: "",
   repo: "",
   license: "",
-  privacy: "",
   portfolio: "https://marcel14.dev/",
   github: "https://github.com/JacobsM14",
   linkedin: "https://www.linkedin.com/in/m-esplugas",
-  contact: "",
+  contact: "mailto:contact.marcelesplu@gmail.com",
 };

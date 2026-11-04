@@ -1,0 +1,11 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Privacy from "../../components/Privacy.astro";
+import { useTranslations } from "../../i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
+---
+
+<Layout title={t("privacy.metaTitle")} description={t("privacy.metaDescription")}>
+  <Privacy />
+</Layout>
