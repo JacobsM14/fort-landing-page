@@ -2,10 +2,8 @@
 import { defineConfig, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
-// https://astro.build/config
 export default defineConfig({
-  // Needed for canonical and hreflang links (see src/layouts/Layout.astro)
-  // site: "https://your-domain.com",
+  site: "https://fort.marcel14.dev",
   fonts: [
     {
       provider: fontProviders.fontsource(),
