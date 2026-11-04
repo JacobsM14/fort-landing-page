@@ -28,6 +28,13 @@
   "steps.progress.description": "Consulta los pesos y repeticiones de cada ejercicio a lo largo del tiempo y corrige cualquier serie pasada si lo necesitas.",
   "steps.progress.imageAlt": "Primer plano de las placas de peso de una máquina de gimnasio",
   "steps.progress.screenshotAlt": "Pantalla de progreso de Fort con una gráfica del 1RM estimado del press de banca",
+  "colors.title": "Elige entre 6 colores diferentes",
+  "colors.orange": "Naranja",
+  "colors.blue": "Azul",
+  "colors.green": "Verde",
+  "colors.purple": "Morado",
+  "colors.pink": "Rosa",
+  "colors.yellow": "Amarillo",
   "download.eyebrow": "Descargar · Android",
   "download.title": "Empieza a entrenar con Fort",
   "download.description": "Fort solo está disponible en Google Play, para móviles Android.",
@@ -44,4 +51,5 @@
   "footer.github": "GitHub",
   "footer.linkedin": "LinkedIn",
   "footer.contact": "Contacto"
+
 }

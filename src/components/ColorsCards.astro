@@ -1,0 +1,127 @@
+---
+import enColorOrange from "../assets/screenshots/en/colors/en_orange.webp";
+import enColorBlue from "../assets/screenshots/en/colors/en_blue.webp";
+import enColorGreen from "../assets/screenshots/en/colors/en_green.webp";
+import enColorPurple from "../assets/screenshots/en/colors/en_purple.webp";
+import enColorPink from "../assets/screenshots/en/colors/en_pink.webp";
+import enColorYellow from "../assets/screenshots/en/colors/en_yellow.webp";
+import esColorOrange from "../assets/screenshots/es/colors/es_orange.webp";
+import esColorBlue from "../assets/screenshots/es/colors/es_blue.webp";
+import esColorGreen from "../assets/screenshots/es/colors/es_green.webp";
+import esColorPurple from "../assets/screenshots/es/colors/es_purple.webp";
+import esColorPink from "../assets/screenshots/es/colors/es_pink.webp";
+import esColorYellow from "../assets/screenshots/es/colors/es_yellow.webp";
+import { Image } from "astro:assets";
+
+import {
+  defaultLang,
+  isLang,
+  useTranslations,
+  type Lang,
+  type UIKey,
+} from "../i18n/utils";
+
+const lang = isLang(Astro.currentLocale) ? Astro.currentLocale : defaultLang;
+const t = useTranslations(lang);
+
+type ColorName = "orange" | "blue" | "green" | "purple" | "pink" | "yellow";
+
+const colors: {
+  [lang in Lang]: {
+    [color in ColorName]: {
+      img: ImageMetadata;
+      title: UIKey;
+    };
+  };
+} = {
+  en: {
+    orange: {
+      img: enColorOrange,
+      title: "colors.orange",
+    },
+    blue: {
+      img: enColorBlue,
+      title: "colors.blue",
+    },
+    green: {
+      img: enColorGreen,
+      title: "colors.green",
+    },
+    purple: {
+      img: enColorPurple,
+      title: "colors.purple",
+    },
+    pink: {
+      img: enColorPink,
+      title: "colors.pink",
+    },
+    yellow: {
+      img: enColorYellow,
+      title: "colors.yellow",
+    },
+  },
+  es: {
+    orange: {
+      img: esColorOrange,
+      title: "colors.orange",
+    },
+    blue: {
+      img: esColorBlue,
+      title: "colors.blue",
+    },
+    green: {
+      img: esColorGreen,
+      title: "colors.green",
+    },
+    purple: {
+      img: esColorPurple,
+      title: "colors.purple",
+    },
+    pink: {
+      img: esColorPink,
+      title: "colors.pink",
+    },
+    yellow: {
+      img: esColorYellow,
+      title: "colors.yellow",
+    },
+  },
+};
+
+// Tailwind only generates classes it finds written out in full, so `bg-${color}` would never be emitted.
+const swatchClasses: Record<ColorName, string> = {
+  orange: "bg-orange",
+  blue: "bg-blue",
+  green: "bg-green",
+  purple: "bg-purple",
+  pink: "bg-pink",
+  yellow: "bg-yellow",
+};
+---
+
+<section aria-labelledby="colors-cards-title" class="flex flex-col gap-10 my-20">
+  <h2
+    id="colors-cards-title"
+    class="text-3xl font-bold text-text md:text-4xl"
+  >
+    {t("colors.title")}
+  </h2>
+  <div class="flex items-center justify-between">
+    {
+      Object.entries(colors[lang]).map(([color, { img, title }]) => (
+        <div class="flex flex-col items-center hover:scale-130 transition-transform">
+          <span
+            class:list={[
+              "h-10 w-10 rounded-full border-2 border-text p-1 mb-3",
+              swatchClasses[color as ColorName],
+            ]}
+          />
+          <Image src={img} alt={t(title)} />
+          <p class="mt-4 font-mono text-[13px] tracking-[1px] text-disabled uppercase">
+            {t(title)}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+</section>
