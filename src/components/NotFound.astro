@@ -1,0 +1,50 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import {
+  defaultLang,
+  languages,
+  useTranslations,
+  type Lang,
+} from "../i18n/utils";
+
+const lang = Astro.currentLocale ?? defaultLang;
+const t = useTranslations(lang);
+
+// Hosts serve this single page for every missing URL, whatever its locale,
+// so each other language gets a way home written in that language.
+const otherLanguages = (Object.keys(languages) as Lang[]).filter(
+  (code) => code !== lang,
+);
+---
+
+<main
+  class="mx-auto flex min-h-[60vh] w-full max-w-page flex-col items-start justify-center gap-7 px-12 py-16"
+>
+  <p class="font-mono text-[13px] tracking-[1px] text-accent uppercase">
+    {t("notFound.eyebrow")}
+  </p>
+  <h1 class="max-w-2xl text-5xl leading-[1.05] font-bold text-text md:text-6xl">
+    {t("notFound.title")}
+  </h1>
+  <p class="max-w-xl text-[19px] text-disabled">
+    {t("notFound.description")}
+  </p>
+  <a
+    href={getRelativeLocaleUrl(lang)}
+    class="mt-2 w-full rounded bg-accent px-6 py-4 text-center font-bold text-bg-dark transition-colors hover:bg-accent/85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent md:w-auto md:px-10 md:text-lg"
+  >
+    {t("notFound.cta")}
+  </a>
+  {
+    otherLanguages.map((code) => (
+      <a
+        href={getRelativeLocaleUrl(code)}
+        hreflang={code}
+        lang={code}
+        class="text-sm text-disabled underline-offset-4 transition-colors hover:text-accent hover:underline"
+      >
+        {useTranslations(code)("notFound.otherLanguage")}
+      </a>
+    ))
+  }
+</main>

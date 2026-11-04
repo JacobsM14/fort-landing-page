@@ -87,5 +87,11 @@
   "privacy.changes.text": "Si una versión futura cambia cómo se tratan tus datos (por ejemplo, para sincronizarlos entre dispositivos), se explicará aquí antes de que ocurra.",
   "privacy.contact.title": "Contacto",
   "privacy.contact.text": "Dudas sobre privacidad:",
-  "privacy.updated": "Última actualización: 4 de noviembre de 2026"
+  "privacy.updated": "Última actualización: 4 de noviembre de 2026",
+  "notFound.metaTitle": "Página no encontrada · Fort",
+  "notFound.eyebrow": "Error 404",
+  "notFound.title": "Esta página no existe.",
+  "notFound.description": "Puede que el enlace esté roto o que la página se haya movido. Vuelve al inicio y sigue donde lo dejaste.",
+  "notFound.cta": "Volver al inicio",
+  "notFound.otherLanguage": "¿Buscas la versión en español? Ir al inicio"
 }
