@@ -15,8 +15,9 @@ const screenshots: Record<Lang, ImageMetadata> = {
 ---
 
 <section
+  id="download"
   aria-labelledby="download-title"
-  class="relative mx-auto mt-8 grid max-w-4xl items-center gap-10 overflow-hidden px-6 py-12 md:mt-12 md:grid-cols-[1fr_auto] md:px-14"
+  class="scroll-mt-32 relative mx-auto mt-8 grid w-full max-w-4xl items-center gap-10 overflow-hidden px-6 py-10 text-center md:mt-12 md:grid-cols-[1fr_auto] md:px-14 md:py-12 md:text-left"
 >
   <svg
     aria-hidden="true"
@@ -31,14 +32,17 @@ const screenshots: Record<Lang, ImageMetadata> = {
       stroke-dasharray="27 16"></rect>
   </svg>
 
-  <div class="flex flex-col items-start gap-6">
+  <div class="flex flex-col items-center gap-5 md:items-start md:gap-6">
     <p class="font-mono text-[13px] tracking-[1px] text-accent uppercase">
       {t("download.eyebrow")}
     </p>
-    <h2 id="download-title" class="text-4xl font-bold text-text md:text-5xl">
+    <h2
+      id="download-title"
+      class="text-3xl leading-tight font-bold text-text sm:text-4xl md:text-5xl"
+    >
       {t("download.title")}
     </h2>
-    <p class="max-w-md text-[19px] text-disabled">
+    <p class="max-w-md text-[17px] text-disabled md:text-[19px]">
       {t("download.description")}
     </p>
     <DownloadButton class="mt-2" />
