@@ -12,7 +12,7 @@ const groups: { title: UIKey; items: { label: UIKey; href: string }[] }[] = [
     title: "footer.project",
     items: [
       { label: "footer.sourceCode", href: links.repo },
-      { label: "footer.license", href: links.license },
+      { label: "footer.license", href: getRelativeLocaleUrl(lang, "license") },
       { label: "footer.privacy", href: getRelativeLocaleUrl(lang, "privacy") },
     ],
   },
