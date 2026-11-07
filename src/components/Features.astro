@@ -1,7 +1,7 @@
 ---
-import { defaultLang, useTranslations, type UIKey } from "../i18n/utils";
+import { useTranslations, type UIKey } from "../i18n/utils";
 
-const t = useTranslations(Astro.currentLocale ?? defaultLang);
+const t = useTranslations(Astro.currentLocale);
 
 const features: UIKey[] = [
   "features.offline",

@@ -1,10 +1,10 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
 import logo from "../assets/logo.svg";
-import { defaultLang, useTranslations, type UIKey } from "../i18n/utils";
+import { getLang, useTranslations, type UIKey } from "../i18n/utils";
 import { authorName, links } from "../links";
 
-const lang = Astro.currentLocale ?? defaultLang;
+const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
 
 const groups: { title: UIKey; items: { label: UIKey; href: string }[] }[] = [

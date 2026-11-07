@@ -2,10 +2,10 @@
 import { Image } from "astro:assets";
 import enProgress from "../assets/screenshots/en/progress.webp";
 import esProgress from "../assets/screenshots/es/progress.webp";
-import { defaultLang, isLang, useTranslations, type Lang } from "../i18n/utils";
+import { getLang, useTranslations, type Lang } from "../i18n/utils";
 import DownloadButton from "./DownloadButton.astro";
 
-const lang = isLang(Astro.currentLocale) ? Astro.currentLocale : defaultLang;
+const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
 
 const screenshots: Record<Lang, ImageMetadata> = {

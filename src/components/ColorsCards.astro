@@ -14,14 +14,13 @@ import esColorYellow from "../assets/screenshots/es/colors/es_yellow.webp";
 import { Image } from "astro:assets";
 
 import {
-  defaultLang,
-  isLang,
+  getLang,
   useTranslations,
   type Lang,
   type UIKey,
 } from "../i18n/utils";
 
-const lang = isLang(Astro.currentLocale) ? Astro.currentLocale : defaultLang;
+const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
 
 type ColorName = "orange" | "blue" | "green" | "purple" | "pink" | "yellow";

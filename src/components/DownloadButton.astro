@@ -1,21 +1,16 @@
 ---
-import { defaultLang, useTranslations } from "../i18n/utils";
+import { useTranslations } from "../i18n/utils";
 import { links } from "../links";
+import ButtonLink from "./ButtonLink.astro";
 
 interface Props {
   class?: string;
 }
 
 const { class: className } = Astro.props;
-const t = useTranslations(Astro.currentLocale ?? defaultLang);
+const t = useTranslations(Astro.currentLocale);
 ---
 
-<a
-  href={links.playStore}
-  class:list={[
-    "w-full rounded bg-accent px-6 py-4 text-center font-bold text-bg-dark transition-colors hover:bg-accent/85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent md:w-auto md:px-10 md:text-lg",
-    className,
-  ]}
->
+<ButtonLink href={links.playStore} class={className}>
   {t("download.cta")}
-</a>
+</ButtonLink>

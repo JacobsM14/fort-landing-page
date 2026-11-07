@@ -10,14 +10,13 @@ import planImage from "../assets/photos/plan.webp";
 import progressImage from "../assets/photos/progress.webp";
 import trainImage from "../assets/photos/train.webp";
 import {
-  defaultLang,
-  isLang,
+  getLang,
   useTranslations,
   type Lang,
   type UIKey,
 } from "../i18n/utils";
 
-const lang = isLang(Astro.currentLocale) ? Astro.currentLocale : defaultLang;
+const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
 
 const steps: {

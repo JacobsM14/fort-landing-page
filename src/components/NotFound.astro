@@ -1,13 +1,14 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
 import {
-  defaultLang,
+  getLang,
   languages,
   useTranslations,
   type Lang,
 } from "../i18n/utils";
+import ButtonLink from "./ButtonLink.astro";
 
-const lang = Astro.currentLocale ?? defaultLang;
+const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
 
 // Hosts serve this single page for every missing URL, whatever its locale,
@@ -29,12 +30,9 @@ const otherLanguages = (Object.keys(languages) as Lang[]).filter(
   <p class="max-w-xl text-[19px] text-disabled">
     {t("notFound.description")}
   </p>
-  <a
-    href={getRelativeLocaleUrl(lang)}
-    class="mt-2 w-full rounded bg-accent px-6 py-4 text-center font-bold text-bg-dark transition-colors hover:bg-accent/85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent md:w-auto md:px-10 md:text-lg"
-  >
+  <ButtonLink href={getRelativeLocaleUrl(lang)} class="mt-2">
     {t("notFound.cta")}
-  </a>
+  </ButtonLink>
   {
     otherLanguages.map((code) => (
       <a

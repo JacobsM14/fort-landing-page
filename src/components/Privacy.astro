@@ -1,8 +1,8 @@
 ---
-import { defaultLang, useTranslations, type UIKey } from "../i18n/utils";
+import { useTranslations, type UIKey } from "../i18n/utils";
 import { links } from "../links";
 
-const t = useTranslations(Astro.currentLocale ?? defaultLang);
+const t = useTranslations(Astro.currentLocale);
 
 type Block =
   | { type: "text"; text: UIKey }

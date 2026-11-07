@@ -14,12 +14,22 @@ export const languages: Record<Lang, string> = {
   es: "Español",
 };
 
+// Locale codes for Open Graph's og:locale
+export const ogLocales: Record<Lang, string> = {
+  en: "en_US",
+  es: "es_ES",
+};
+
 export function isLang(lang: string | undefined): lang is Lang {
   return lang !== undefined && lang in ui;
 }
 
+export function getLang(locale: string | undefined): Lang {
+  return isLang(locale) ? locale : defaultLang;
+}
+
 export function useTranslations(lang: string | undefined) {
-  const dict: Partial<Record<UIKey, string>> = ui[isLang(lang) ? lang : defaultLang];
+  const dict: Partial<Record<UIKey, string>> = ui[getLang(lang)];
   return (key: UIKey) => dict[key] ?? ui[defaultLang][key];
 }
 
