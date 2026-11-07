@@ -1,8 +1,8 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
-import Logo from "../assets/logo.svg";
+import Logo from "../../assets/logo.svg";
 import LanguagePicker from "./LanguagePicker.astro";
-import { getLang, useTranslations, type UIKey } from "../i18n/utils";
+import { getLang, useTranslations, type UIKey } from "../../i18n/utils";
 
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);

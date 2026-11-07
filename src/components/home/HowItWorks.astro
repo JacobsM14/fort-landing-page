@@ -1,20 +1,20 @@
 ---
 import { Image } from "astro:assets";
-import enNewRoutine from "../assets/screenshots/en/new_routine.webp";
-import enProgress from "../assets/screenshots/en/progress.webp";
-import enRoutineDone from "../assets/screenshots/en/routine_done.webp";
-import esNewRoutine from "../assets/screenshots/es/new_routine.webp";
-import esProgress from "../assets/screenshots/es/progress.webp";
-import esRoutineDone from "../assets/screenshots/es/routine_done.webp";
-import planImage from "../assets/photos/plan.webp";
-import progressImage from "../assets/photos/progress.webp";
-import trainImage from "../assets/photos/train.webp";
+import enNewRoutine from "../../assets/screenshots/en/new_routine.webp";
+import enProgress from "../../assets/screenshots/en/progress.webp";
+import enRoutineDone from "../../assets/screenshots/en/routine_done.webp";
+import esNewRoutine from "../../assets/screenshots/es/new_routine.webp";
+import esProgress from "../../assets/screenshots/es/progress.webp";
+import esRoutineDone from "../../assets/screenshots/es/routine_done.webp";
+import planImage from "../../assets/photos/plan.webp";
+import progressImage from "../../assets/photos/progress.webp";
+import trainImage from "../../assets/photos/train.webp";
 import {
   getLang,
   useTranslations,
   type Lang,
   type UIKey,
-} from "../i18n/utils";
+} from "../../i18n/utils";
 
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);

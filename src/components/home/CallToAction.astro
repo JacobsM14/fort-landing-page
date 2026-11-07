@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
-import enProgress from "../assets/screenshots/en/progress.webp";
-import esProgress from "../assets/screenshots/es/progress.webp";
-import { getLang, useTranslations, type Lang } from "../i18n/utils";
-import DownloadButton from "./DownloadButton.astro";
+import enProgress from "../../assets/screenshots/en/progress.webp";
+import esProgress from "../../assets/screenshots/es/progress.webp";
+import { getLang, useTranslations, type Lang } from "../../i18n/utils";
+import DownloadButton from "../ui/DownloadButton.astro";
 
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);

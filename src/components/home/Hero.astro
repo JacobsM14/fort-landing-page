@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
-import enWorkout from "../assets/screenshots/en/workout.webp";
-import esWorkout from "../assets/screenshots/es/workout.webp";
-import { getLang, useTranslations, type Lang } from "../i18n/utils";
-import DownloadButton from "./DownloadButton.astro";
+import enWorkout from "../../assets/screenshots/en/workout.webp";
+import esWorkout from "../../assets/screenshots/es/workout.webp";
+import { getLang, useTranslations, type Lang } from "../../i18n/utils";
+import DownloadButton from "../ui/DownloadButton.astro";
 
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
