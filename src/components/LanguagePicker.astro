@@ -1,16 +1,19 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
 import {
-  defaultLang,
-  isLang,
+  getLang,
   languages,
   pathWithoutLocale,
   useTranslations,
 } from "../i18n/utils";
 
-const current = isLang(Astro.currentLocale) ? Astro.currentLocale : defaultLang;
+const current = getLang(Astro.currentLocale);
 const t = useTranslations(current);
-const path = pathWithoutLocale(Astro.url.pathname, current);
+// The 404 page has no counterpart in other languages, so it links to their home pages.
+const path =
+  Astro.routePattern === "/404"
+    ? "/"
+    : pathWithoutLocale(Astro.url.pathname, current);
 ---
 
 <details data-language-picker class="group relative">

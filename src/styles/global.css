@@ -33,6 +33,12 @@
   }
 }
 
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+}
+
 @utility glow {
   --glow-color: var(--color-accent);
   position: relative;

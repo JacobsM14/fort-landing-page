@@ -6,9 +6,12 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import {
   defaultLang,
+  getLang,
   languages,
+  ogLocales,
   pathWithoutLocale,
   useTranslations,
+  type Lang,
 } from "../i18n/utils";
 import "../styles/global.css";
 
@@ -17,20 +20,33 @@ interface Props {
   description?: string;
 }
 
-const lang = Astro.currentLocale ?? defaultLang;
+const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
 const { title = t("meta.title"), description = t("meta.description") } =
   Astro.props;
 
 const path = pathWithoutLocale(Astro.url.pathname, lang);
+// The 404 page answers every missing URL, so it has no address of its own to point to.
+const isNotFound = Astro.routePattern === "/404";
+const canonical =
+  Astro.site && !isNotFound
+    ? new URL(Astro.url.pathname, Astro.site)
+    : undefined;
+const ogImage = Astro.site && new URL(`/og/${lang}.png`, Astro.site);
+const otherLangs = (Object.keys(languages) as Lang[]).filter(
+  (code) => code !== lang,
+);
 ---
 
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Same color as --color-bg-dark in global.css -->
+    <meta name="theme-color" content="#0c0c0d" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/svg+xml" href={logo.src} />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="generator" content={Astro.generator} />
     <Font cssVariable="--font-instrument-sans" preload />
     <Font cssVariable="--font-jetbrains-mono" />
@@ -39,9 +55,9 @@ const path = pathWithoutLocale(Astro.url.pathname, lang);
     <!-- TODO: remove once the site is ready to be indexed. Don't block it in robots.txt instead: crawlers would never see this tag. -->
     <meta name="robots" content="noindex, nofollow" />
     {
-      Astro.site && (
+      canonical && (
         <>
-          <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+          <link rel="canonical" href={canonical} />
           {Object.keys(languages).map((code) => (
             <link
               rel="alternate"
@@ -57,6 +73,28 @@ const path = pathWithoutLocale(Astro.url.pathname, lang);
         </>
       )
     }
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={t("app.name")} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {
+      ogImage && (
+        <>
+          <meta property="og:image" content={ogImage} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:alt" content={t("meta.ogImageAlt")} />
+        </>
+      )
+    }
+    <meta property="og:locale" content={ogLocales[lang]} />
+    {
+      otherLangs.map((code) => (
+        <meta property="og:locale:alternate" content={ogLocales[code]} />
+      ))
+    }
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body class="min-h-screen bg-bg-dark font-sans">
     <Header />
