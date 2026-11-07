@@ -2,23 +2,27 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import Logo from "../assets/logo.svg";
 import LanguagePicker from "./LanguagePicker.astro";
-import { defaultLang, useTranslations, type UIKey } from "../i18n/utils";
+import { getLang, useTranslations, type UIKey } from "../i18n/utils";
 
-const lang = Astro.currentLocale ?? defaultLang;
+const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
 
-const navItems: { label: UIKey; path: string }[] = [
-  { label: "nav.home", path: "/" },
+// Section ids on the home page. Other pages link back to them.
+const navItems: { label: UIKey; section: string }[] = [
+  { label: "nav.home", section: "home" },
+  { label: "nav.howItWorks", section: "how-it-works" },
+  { label: "nav.colors", section: "colors" },
+  { label: "nav.download", section: "download" },
 ];
 
-const currentPath = Astro.url.pathname;
+const homeUrl = getRelativeLocaleUrl(lang);
 ---
 
 <div class="sticky top-6 z-50 mx-auto mt-6 w-full max-w-page px-6">
   <header
-    class="flex origin-top items-center justify-between gap-6 rounded border border-border/40 bg-bg-dark-secondary/60 px-6 py-3 text-text backdrop-blur-md backdrop-saturate-150 shrink-on-scroll"
+    class="flex origin-top items-center justify-between gap-6 rounded border border-border/40 bg-bg-dark-secondary/90 px-6 py-3 text-text shrink-on-scroll md:bg-bg-dark-secondary/60 md:backdrop-blur-md md:backdrop-saturate-150"
   >
-    <a href={getRelativeLocaleUrl(lang)} class="flex items-center gap-3">
+    <a href={homeUrl} class="flex items-center gap-3">
       <Logo role="img" aria-label={t("app.name")} class="size-8" />
       <span class="flex flex-col leading-tight">
         <span class="text-xl font-bold">{t("app.name")}</span>
@@ -27,31 +31,71 @@ const currentPath = Astro.url.pathname;
     </a>
 
     <div class="flex items-center gap-6">
-      <nav aria-label={t("nav.label")}>
+      <nav aria-label={t("nav.label")} data-nav class="relative hidden lg:block">
         <ul class="flex items-center gap-6">
           {
-            navItems.map(({ label, path }) => {
-              const href = getRelativeLocaleUrl(lang, path);
-              const isCurrent = href === currentPath;
-              return (
-                <li>
-                  <a
-                    href={href}
-                    aria-current={isCurrent ? "page" : undefined}
-                    class:list={[
-                      "transition-colors hover:text-text",
-                      isCurrent ? "text-text" : "text-disabled",
-                    ]}
-                  >
-                    {t(label)}
-                  </a>
-                </li>
-              );
-            })
+            navItems.map(({ label, section }) => (
+              <li>
+                <a
+                  href={`${homeUrl}#${section}`}
+                  data-section={section}
+                  class="text-disabled transition-colors hover:text-text aria-[current]:text-text"
+                >
+                  {t(label)}
+                </a>
+              </li>
+            ))
           }
         </ul>
+        <span
+          aria-hidden="true"
+          data-nav-indicator
+          class="absolute -top-2 left-0 h-0.5 w-0 bg-accent opacity-0 transition-[translate,width,opacity] duration-300 ease-out"
+        ></span>
       </nav>
       <LanguagePicker />
     </div>
   </header>
 </div>
+
+<script>
+  const nav = document.querySelector<HTMLElement>("[data-nav]");
+  const indicator = nav?.querySelector<HTMLElement>("[data-nav-indicator]");
+  const links = [
+    ...(nav?.querySelectorAll<HTMLAnchorElement>("a[data-section]") ?? []),
+  ];
+  const sections = links
+    .map((link) => document.getElementById(link.dataset.section ?? ""))
+    .filter((section) => section !== null);
+
+  let active: HTMLAnchorElement | undefined;
+
+  const moveIndicator = () => {
+    if (!indicator || !active) return;
+    indicator.style.width = `${active.offsetWidth}px`;
+    indicator.style.translate = `${active.offsetLeft}px 0`;
+    indicator.style.opacity = "1";
+  };
+
+  const activate = (id: string) => {
+    active = links.find((link) => link.dataset.section === id);
+    for (const link of links) {
+      if (link === active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    }
+    moveIndicator();
+  };
+
+  // A section becomes active when it crosses a line 40% down the viewport.
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) activate(entry.target.id);
+      }
+    },
+    { rootMargin: "-40% 0px -60% 0px" },
+  );
+
+  for (const section of sections) observer.observe(section);
+  window.addEventListener("resize", moveIndicator);
+</script>
