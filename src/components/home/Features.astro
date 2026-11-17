@@ -8,8 +8,6 @@ const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
 const number = new Intl.NumberFormat(lang);
 
-const cardCount = 6;
-
 const measures: { exercise: UIKey; type: UIKey; value: UIKey }[] = [
   {
     exercise: "features.measure.weight.exercise",
