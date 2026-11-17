@@ -1,6 +1,8 @@
 ---
-import { useTranslations, type UIKey } from "../i18n/utils";
-import { links } from "../links";
+import { useTranslations, type UIKey } from "../../i18n/utils";
+import { contactEmail, links } from "../../links";
+import LegalPage from "./LegalPage.astro";
+import LegalSection from "./LegalSection.astro";
 
 const t = useTranslations(Astro.currentLocale);
 
@@ -89,65 +91,49 @@ const sections: { title: UIKey; blocks: Block[] }[] = [
     blocks: [{ type: "email", text: "privacy.contact.text" }],
   },
 ];
-
-const email = links.contact.replace("mailto:", "");
 ---
 
-<main class="mx-auto w-full max-w-page px-12 py-16 md:py-24">
-  <article class="mx-auto flex max-w-2xl flex-col gap-14">
-    <header class="flex flex-col gap-8">
-      <h1 class="text-4xl leading-tight font-bold text-text md:text-5xl">
-        {t("privacy.title")}
-      </h1>
-      <p class="text-[19px] text-disabled">{t("privacy.intro")}</p>
-    </header>
-
-    {
-      sections.map(({ title, blocks }) => (
-        <section class="flex flex-col gap-4 text-[17px] leading-relaxed text-disabled">
-          <h2 class="font-mono text-[13px] tracking-[1px] text-accent uppercase">
-            {t(title)}
-          </h2>
-          {blocks.map((block) => {
-            if (block.type === "text") return <p>{t(block.text)}</p>;
-            if (block.type === "list")
-              return (
-                <ul class="flex list-disc flex-col gap-2 pl-5">
-                  {block.items.map((item) => (
-                    <li class="pl-1">{t(item)}</li>
-                  ))}
-                </ul>
-              );
-            if (block.type === "terms")
-              return (
-                <ul class="flex list-disc flex-col gap-2 pl-5">
-                  {block.items.map(({ term, text }) => (
-                    <li class="pl-1">
-                      <strong class="text-text">{t(term)}</strong> {t(text)}
-                    </li>
-                  ))}
-                </ul>
-              );
+<LegalPage title="privacy.title" intro="privacy.intro">
+  {
+    sections.map(({ title, blocks }) => (
+      <LegalSection title={title}>
+        {blocks.map((block) => {
+          if (block.type === "text") return <p>{t(block.text)}</p>;
+          if (block.type === "list")
             return (
-              <p>
-                {t(block.text)}{" "}
-                <a
-                  href={links.contact}
-                  class="text-accent underline-offset-4 hover:underline"
-                >
-                  {email}
-                </a>
-              </p>
+              <ul class="flex list-disc flex-col gap-2 pl-5">
+                {block.items.map((item) => (
+                  <li class="pl-1">{t(item)}</li>
+                ))}
+              </ul>
             );
-          })}
-        </section>
-      ))
-    }
+          if (block.type === "terms")
+            return (
+              <ul class="flex list-disc flex-col gap-2 pl-5">
+                {block.items.map(({ term, text }) => (
+                  <li class="pl-1">
+                    <strong class="text-text">{t(term)}</strong> {t(text)}
+                  </li>
+                ))}
+              </ul>
+            );
+          return (
+            <p>
+              {t(block.text)}{" "}
+              <a
+                href={links.contact}
+                class="text-accent underline-offset-4 hover:underline"
+              >
+                {contactEmail}
+              </a>
+            </p>
+          );
+        })}
+      </LegalSection>
+    ))
+  }
 
-    <p
-      class="border-t border-border/40 pt-6 font-mono text-[13px] text-disabled"
-    >
-      {t("privacy.updated")}
-    </p>
-  </article>
-</main>
+  <p class="border-t border-border/40 pt-6 font-mono text-[13px] text-disabled">
+    {t("privacy.updated")}
+  </p>
+</LegalPage>

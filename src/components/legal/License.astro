@@ -1,0 +1,59 @@
+---
+import licenseText from "../../license.txt?raw";
+import { useTranslations } from "../../i18n/utils";
+import { contactEmail, links } from "../../links";
+import LegalPage from "./LegalPage.astro";
+import LegalSection from "./LegalSection.astro";
+
+const t = useTranslations(Astro.currentLocale);
+
+const paragraphs = licenseText
+  .trim()
+  .split(/\n\s*\n/)
+  .map((paragraph) => paragraph.replace(/\s*\n\s*/g, " "));
+---
+
+<LegalPage title="license.title" intro="license.intro">
+  <LegalSection title="license.summary.title">
+    <p>{t("license.summary.text")}</p>
+    <p class="text-sm">{t("license.summary.note")}</p>
+  </LegalSection>
+
+  <LegalSection title="license.text.title">
+    <p>{t("license.text.intro")}</p>
+    <div
+      lang="en"
+      class="flex flex-col gap-4 rounded border border-border/40 bg-bg-dark-secondary p-6 font-mono text-sm leading-relaxed"
+    >
+      {
+        paragraphs.map((paragraph) => {
+          const [before, after] = paragraph.split(contactEmail);
+          return after === undefined ? (
+            <p>{paragraph}</p>
+          ) : (
+            <p>
+              {before}
+              <a
+                href={links.contact}
+                class="text-accent underline-offset-4 hover:underline"
+              >
+                {contactEmail}
+              </a>
+              {after}
+            </p>
+          );
+        })
+      }
+    </div>
+    {
+      links.repo && (
+        <a
+          href={links.repo}
+          class="self-start text-sm text-accent underline-offset-4 hover:underline"
+        >
+          {t("license.viewRepo")}
+        </a>
+      )
+    }
+  </LegalSection>
+</LegalPage>

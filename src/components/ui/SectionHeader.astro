@@ -1,0 +1,18 @@
+---
+import { useTranslations, type UIKey } from "../../i18n/utils";
+
+interface Props {
+  id: string;
+  eyebrow: UIKey;
+  title: UIKey;
+  class?: string;
+}
+
+const { id, eyebrow, title, class: className } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
+---
+
+<div class:list={["flex flex-col gap-4 fade-in-on-scroll", className]}>
+  <p class="eyebrow text-accent">{t(eyebrow)}</p>
+  <h2 {id} class="text-3xl font-bold text-text md:text-4xl">{t(title)}</h2>
+</div>

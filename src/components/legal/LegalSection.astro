@@ -1,0 +1,15 @@
+---
+import { useTranslations, type UIKey } from "../../i18n/utils";
+
+interface Props {
+  title: UIKey;
+}
+
+const { title } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
+---
+
+<section class="flex flex-col gap-4 text-[17px] leading-relaxed text-disabled">
+  <h2 class="eyebrow text-accent">{t(title)}</h2>
+  <slot />
+</section>

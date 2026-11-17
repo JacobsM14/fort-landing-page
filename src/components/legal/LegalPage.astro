@@ -1,0 +1,23 @@
+---
+import { useTranslations, type UIKey } from "../../i18n/utils";
+
+interface Props {
+  title: UIKey;
+  intro: UIKey;
+}
+
+const { title, intro } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
+---
+
+<main class="mx-auto w-full max-w-page px-4 py-16 md:px-12 md:py-24">
+  <article class="mx-auto flex max-w-2xl flex-col gap-14">
+    <header class="flex flex-col gap-8">
+      <h1 class="text-4xl leading-tight font-bold text-text md:text-5xl">
+        {t(title)}
+      </h1>
+      <p class="text-[19px] text-disabled">{t(intro)}</p>
+    </header>
+    <slot />
+  </article>
+</main>

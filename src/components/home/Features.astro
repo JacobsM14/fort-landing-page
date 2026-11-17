@@ -1,6 +1,7 @@
 ---
 import WifiOff from "../../assets/icons/wifi-off.svg";
 import { getLang, useTranslations, type UIKey } from "../../i18n/utils";
+import SectionHeader from "../ui/SectionHeader.astro";
 import FeatureCard from "./FeatureCard.astro";
 
 const lang = getLang(Astro.currentLocale);
@@ -97,14 +98,11 @@ const levelClasses = ["bg-border/20", "bg-accent/35", "bg-accent"];
   aria-labelledby="features-title"
   class="scroll-mt-32 flex flex-col gap-10 py-16"
 >
-  <div class="flex flex-col gap-4 fade-in-on-scroll lg:col-span-2">
-    <p class="font-mono text-[13px] tracking-[1px] text-accent uppercase">
-      {t("features.eyebrow")}
-    </p>
-    <h2 id="features-title" class="text-3xl font-bold text-text md:text-4xl">
-      {t("features.title")}
-    </h2>
-  </div>
+  <SectionHeader
+    id="features-title"
+    eyebrow="features.eyebrow"
+    title="features.title"
+  />
   <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
     <FeatureCard
       title="features.measure.title"

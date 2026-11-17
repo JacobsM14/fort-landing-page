@@ -39,6 +39,13 @@
   }
 }
 
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
 @utility glow {
   --glow-color: var(--color-accent);
   position: relative;

@@ -15,6 +15,7 @@ import {
   type Lang,
   type UIKey,
 } from "../../i18n/utils";
+import SectionHeader from "../ui/SectionHeader.astro";
 
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
@@ -65,14 +66,12 @@ const screenshotClasses = [
   aria-labelledby="steps-title"
   class="scroll-mt-32 mt-16 grid items-center gap-12 py-16 md:mt-12 lg:grid-cols-[1fr_minmax(0,22rem)]"
 >
-  <div class="flex flex-col gap-4 fade-in-on-scroll lg:col-span-2">
-    <p class="font-mono text-[13px] tracking-[1px] text-accent uppercase">
-      {t("steps.eyebrow")}
-    </p>
-    <h2 id="steps-title" class="text-3xl font-bold text-text md:text-4xl">
-      {t("steps.title")}
-    </h2>
-  </div>
+  <SectionHeader
+    id="steps-title"
+    eyebrow="steps.eyebrow"
+    title="steps.title"
+    class="lg:col-span-2"
+  />
 
   <div
     class="glow glow-bottom mx-auto w-40 sm:w-56 md:w-72 lg:w-60 xl:w-72"
