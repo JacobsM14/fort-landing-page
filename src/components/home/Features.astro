@@ -1,0 +1,243 @@
+---
+import WifiOff from "../../assets/icons/wifi-off.svg";
+import { getLang, useTranslations, type UIKey } from "../../i18n/utils";
+import FeatureCard from "./FeatureCard.astro";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const number = new Intl.NumberFormat(lang);
+
+const cardCount = 6;
+
+const measures: { exercise: UIKey; type: UIKey; value: UIKey }[] = [
+  {
+    exercise: "features.measure.weight.exercise",
+    type: "features.measure.weight.type",
+    value: "features.measure.weight.value",
+  },
+  {
+    exercise: "features.measure.bodyweight.exercise",
+    type: "features.measure.bodyweight.type",
+    value: "features.measure.bodyweight.value",
+  },
+  {
+    exercise: "features.measure.time.exercise",
+    type: "features.measure.time.type",
+    value: "features.measure.time.value",
+  },
+  {
+    exercise: "features.measure.distance.exercise",
+    type: "features.measure.distance.type",
+    value: "features.measure.distance.value",
+  },
+];
+
+const swatches = [
+  "bg-orange",
+  "bg-blue",
+  "bg-green",
+  "bg-purple",
+  "bg-pink",
+  "bg-yellow",
+];
+
+const bmi = 23.4;
+const bmiLimits = [18.5, 25, 30];
+const bmiMarker = 25 + ((bmi - 18.5) / (25 - 18.5)) * 25;
+
+const weekCount = 42;
+const day = 24 * 60 * 60 * 1000;
+const now = new Date();
+const today = Date.UTC(
+  now.getUTCFullYear(),
+  now.getUTCMonth(),
+  now.getUTCDate(),
+);
+const firstDay =
+  today - (new Date(today).getUTCDay() + (weekCount - 1) * 7) * day;
+
+const monthName = new Intl.DateTimeFormat(lang, {
+  month: "short",
+  timeZone: "UTC",
+});
+const weekdayName = new Intl.DateTimeFormat(lang, {
+  weekday: "short",
+  timeZone: "UTC",
+});
+const weekdays = Array.from({ length: 7 }, (_, index) =>
+  index % 2 === 1 ? weekdayName.format(firstDay + index * day) : "",
+);
+
+let seed = 14;
+const random = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+const weeks = Array.from({ length: weekCount }, (_, week) => {
+  const start = firstDay + week * 7 * day;
+  const previousMonth = new Date(start - 7 * day).getUTCMonth();
+  const days = Array.from({ length: 7 }, (_, weekday) => {
+    const habit = weekday % 2 === 1 ? 0.6 : 0.12;
+    const chance = habit * (0.25 + (0.75 * week) / weekCount);
+    const roll = random();
+    return roll < chance * 0.45 ? 2 : roll < chance ? 1 : 0;
+  }).filter((_, weekday) => start + weekday * day <= today);
+  return {
+    month:
+      week > 0 && new Date(start).getUTCMonth() !== previousMonth
+        ? monthName.format(start)
+        : undefined,
+    days,
+  };
+});
+
+const levelClasses = ["bg-border/20", "bg-accent/35", "bg-accent"];
+---
+
+<section
+  id="features"
+  aria-labelledby="features-title"
+  class="scroll-mt-32 flex flex-col gap-10 py-16"
+>
+  <div class="flex flex-col gap-4 lg:col-span-2">
+    <p class="font-mono text-[13px] tracking-[1px] text-accent uppercase">
+      {t("features.eyebrow")}
+    </p>
+    <h2 id="features-title" class="text-3xl font-bold text-text md:text-4xl">
+      {t("features.title")}
+    </h2>
+  </div>
+  <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <FeatureCard
+      title="features.measure.title"
+      description="features.measure.description"
+      highlight
+      class="md:col-span-2"
+    >
+      <div class="grid grid-cols-2 gap-2">
+        {measures.map(({ exercise, type, value }) => (
+          <div class="flex flex-col gap-1 rounded-xs border border-border/25 bg-bg-dark px-3 py-2.5">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between sm:gap-3">
+              <span class="text-sm font-bold text-text">{t(exercise)}</span>
+              <span class="font-mono text-xs text-text sm:text-sm sm:whitespace-nowrap">
+                {t(value)}
+              </span>
+            </div>
+            <span class="font-mono text-[11px] tracking-[1px] text-disabled uppercase">
+              {t(type)}
+            </span>
+          </div>
+        ))}
+      </div>
+    </FeatureCard>
+    <FeatureCard
+      title="features.offline.title"
+      description="features.offline.description"
+      compact
+    >
+      <div class="flex flex-col gap-3">
+        <WifiOff class="size-14 text-accent md:size-20" />
+        <span class="font-mono text-[11px] tracking-[1px] text-disabled uppercase">
+          {t("features.offline.status")}
+        </span>
+      </div>
+    </FeatureCard>
+    <FeatureCard
+      title="features.colors.title"
+      description="features.colors.description"
+      compact
+    >
+      <div class="grid w-fit grid-cols-3 gap-2">
+        {swatches.map((swatch, index) => (
+          <span
+            class:list={[
+              "size-8 rounded-xs md:size-15",
+              swatch,
+              index === 0 &&
+                "ring-2 ring-text ring-offset-2 ring-offset-bg-dark-secondary",
+            ]}
+          />
+        ))}
+      </div>
+    </FeatureCard>
+    <FeatureCard
+      title="features.bmi.title"
+      description="features.bmi.description"
+      compact
+    >
+      <div class="flex flex-col gap-4">
+        <div class="flex items-baseline gap-2">
+          <span class="font-mono text-3xl font-bold text-text md:text-4xl">
+            {number.format(bmi)}
+          </span>
+          <span class="font-mono text-xs tracking-[1px] text-disabled uppercase">
+            {t("features.bmi.label")}
+          </span>
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <div class="relative h-1.5 rounded-xs bg-border/25">
+            <span class="absolute inset-y-0 left-1/4 w-1/4 bg-accent"></span>
+            <span
+              class="absolute -top-1 h-3.5 w-0.5 -translate-x-1/2 rounded-xs bg-text"
+              style={{ left: `${bmiMarker}%` }}
+            />
+          </div>
+          <div class="relative h-3 font-mono text-[10px] text-disabled">
+            {bmiLimits.map((limit, index) => (
+              <span
+                class="absolute -translate-x-1/2"
+                style={{ left: `${(index + 1) * 25}%` }}
+              >
+                {number.format(limit)}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </FeatureCard>
+    <FeatureCard
+      title="features.custom.title"
+      description="features.custom.description"
+      compact
+    >
+      <div class="flex flex-col gap-3">
+        <span class="rounded-xs border border-dashed border-accent px-2 py-2.5 text-center text-xs font-bold whitespace-nowrap text-accent md:px-3 md:text-sm">
+          {t("features.custom.button")}
+        </span>
+        <span class="flex items-center justify-between gap-3 rounded-xs border border-border/40 bg-bg-dark px-3 py-2 max-md:hidden">
+          <span class="text-sm font-bold text-text">
+            {t("features.custom.exercise")}
+          </span>
+          <span class="font-mono text-[10px] tracking-[1px] text-accent uppercase">
+            {t("features.custom.tag")}
+          </span>
+        </span>
+      </div>
+    </FeatureCard>
+    <FeatureCard
+      title="features.activity.title"
+      description="features.activity.description"
+      class="md:col-span-2"
+    >
+      <div class="flex gap-2 font-mono text-[10px] text-disabled">
+        <div class="flex flex-col gap-0.75 pt-5">
+          {weekdays.map((weekday) => (
+            <span class="h-3 leading-3">{weekday}</span>
+          ))}
+        </div>
+        <div class="flex flex-1 justify-end gap-0.75 overflow-hidden mask-l-from-90%">
+          {weeks.map(({ month, days }) => (
+            <div class="relative flex shrink-0 flex-col gap-0.75 pt-5">
+              {month && (
+                <span class="absolute top-0 left-0 leading-3 whitespace-nowrap">
+                  {month}
+                </span>
+              )}
+              {days.map((level) => (
+                <span class:list={["size-3 rounded-xs", levelClasses[level]]} />
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </FeatureCard>
+  </ul>
+</section>
