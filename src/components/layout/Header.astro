@@ -7,11 +7,10 @@ import { getLang, useTranslations, type UIKey } from "../../i18n/utils";
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
 
-// Section ids on the home page. Other pages link back to them.
 const navItems: { label: UIKey; section: string }[] = [
   { label: "nav.home", section: "home" },
   { label: "nav.howItWorks", section: "how-it-works" },
-  { label: "nav.colors", section: "colors" },
+  { label: "nav.features", section: "features" },
   { label: "nav.download", section: "download" },
 ];
 
@@ -86,7 +85,6 @@ const homeUrl = getRelativeLocaleUrl(lang);
     moveIndicator();
   };
 
-  // A section becomes active when it crosses a line 40% down the viewport.
   const observer = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
