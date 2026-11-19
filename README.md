@@ -2,7 +2,7 @@
 
 Landing page for **Fort**, an offline workout tracker for Android. The site presents the app, links to Google Play and hosts its privacy policy and license.
 
-It is live at [fort.marcel14.dev](https://fort.marcel14.dev), in English (`/`) and Spanish (`/es/`).
+It is live at [fort.marcel14.dev](https://fort.marcel14.dev), in English (`/`), Spanish (`/es/`) and Catalan (`/ca/`).
 
 ## Stack
 
@@ -36,7 +36,7 @@ src/
 │   ├── layout/     Header, footer and language picker
 │   ├── legal/      Privacy policy and license pages
 │   └── ui/         Shared pieces: buttons and section headers
-├── i18n/           Translations (en.json, es.json) and helpers
+├── i18n/           Translations (en.json, es.json, ca.json) and helpers
 ├── layouts/        Page shell: <head>, SEO tags, header and footer
 ├── pages/          Routes. Each one only renders a component inside the layout
 ├── styles/         Theme tokens and custom Tailwind utilities
@@ -46,11 +46,13 @@ src/
 
 ## Translations
 
-Every user-facing string lives in `src/i18n/en.json` and `src/i18n/es.json`, under the same key. `en.json` defines the available keys, so a key missing from it is a type error.
+Every user-facing string lives in `src/i18n/en.json`, `src/i18n/es.json` and `src/i18n/ca.json`, under the same key. `en.json` defines the available keys, so a key missing from it is a type error.
 
 Components read strings with `useTranslations(Astro.currentLocale)` from `src/i18n/utils.ts`, and link between languages with `getRelativeLocaleUrl` from `astro:i18n`.
 
-To add a page, create its component in `src/components/`, then render it from `src/pages/<page>.astro` and `src/pages/es/<page>.astro`.
+To add a page, create its component in `src/components/`, then render it from `src/pages/<page>.astro`, `src/pages/es/<page>.astro` and `src/pages/ca/<page>.astro`.
+
+To add a language, add its JSON file and register it in `src/i18n/utils.ts` and `astro.config.mjs`, create its folder in `src/pages/`, add its screenshots in `src/assets/screenshots/<lang>/` and its Open Graph image in `public/og/<lang>.png`.
 
 ## Deployment
 

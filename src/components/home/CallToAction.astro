@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import enProgress from "../../assets/screenshots/en/progress.webp";
 import esProgress from "../../assets/screenshots/es/progress.webp";
+import caProgress from "../../assets/screenshots/ca/progress.webp";
 import { getLang, useTranslations, type Lang } from "../../i18n/utils";
 import DownloadButton from "../ui/DownloadButton.astro";
 
@@ -11,6 +12,7 @@ const t = useTranslations(lang);
 const screenshots: Record<Lang, ImageMetadata> = {
   en: enProgress,
   es: esProgress,
+  ca: caProgress,
 };
 ---
 

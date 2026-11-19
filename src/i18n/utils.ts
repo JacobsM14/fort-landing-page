@@ -1,7 +1,8 @@
 import en from "./en.json";
 import es from "./es.json";
+import ca from "./ca.json";
 
-const ui = { en, es };
+const ui = { en, es, ca };
 
 export type Lang = keyof typeof ui;
 export type UIKey = keyof typeof en;
@@ -12,12 +13,14 @@ export const defaultLang: Lang = "en";
 export const languages: Record<Lang, string> = {
   en: "English",
   es: "Español",
+  ca: "Català",
 };
 
 // Locale codes for Open Graph's og:locale
 export const ogLocales: Record<Lang, string> = {
   en: "en_US",
   es: "es_ES",
+  ca: "ca_ES",
 };
 
 export function isLang(lang: string | undefined): lang is Lang {

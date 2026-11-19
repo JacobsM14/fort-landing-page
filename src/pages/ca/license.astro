@@ -1,0 +1,11 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import License from "../../components/legal/License.astro";
+import { useTranslations } from "../../i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
+---
+
+<Layout title={t("license.metaTitle")} description={t("license.metaDescription")}>
+  <License />
+</Layout>

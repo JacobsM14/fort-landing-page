@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import enWorkout from "../../assets/screenshots/en/workout.webp";
 import esWorkout from "../../assets/screenshots/es/workout.webp";
+import caWorkout from "../../assets/screenshots/ca/workout.webp";
 import { getLang, useTranslations, type Lang } from "../../i18n/utils";
 import DownloadButton from "../ui/DownloadButton.astro";
 
@@ -11,6 +12,7 @@ const t = useTranslations(lang);
 const screenshots: Record<Lang, ImageMetadata> = {
   en: enWorkout,
   es: esWorkout,
+  ca: caWorkout,
 };
 
 const corners = [

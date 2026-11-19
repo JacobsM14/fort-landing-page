@@ -4,11 +4,11 @@ Static Astro 7 site with Tailwind CSS v4 (`@tailwindcss/vite`). Theme colors liv
 
 ### i18n
 
-Uses Astro's built-in i18n routing (`astro.config.mjs`): `defaultLocale: "en"` and `prefixDefaultLocale: false`, so `/` is English and `/es/` is Spanish.
+Uses Astro's built-in i18n routing (`astro.config.mjs`): `defaultLocale: "en"` and `prefixDefaultLocale: false`, so `/` is English, `/es/` is Spanish and `/ca/` is Catalan.
 
-- UI strings go in `src/i18n/en.json` and `src/i18n/es.json`. `en.json` defines the available keys. Never hardcode user-facing text.
+- UI strings go in `src/i18n/en.json`, `src/i18n/es.json` and `src/i18n/ca.json`. `en.json` defines the available keys. Never hardcode user-facing text.
 - Read strings with `useTranslations(Astro.currentLocale)` from `src/i18n/utils.ts`. Don't parse the locale from the URL by hand.
-- Page content lives in a component in `src/components/`. `src/pages/<page>.astro` and `src/pages/es/<page>.astro` only render it inside `src/layouts/Layout.astro`.
+- Page content lives in a component in `src/components/`. `src/pages/<page>.astro`, `src/pages/es/<page>.astro` and `src/pages/ca/<page>.astro` only render it inside `src/layouts/Layout.astro`.
 - Link between locales with `getRelativeLocaleUrl` from `astro:i18n`. No client-side language detection or redirects.
 
 ## Code style
