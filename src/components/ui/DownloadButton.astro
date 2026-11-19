@@ -1,4 +1,5 @@
 ---
+import GooglePlay from "../../assets/icons/google-play.svg";
 import { useTranslations } from "../../i18n/utils";
 import { links } from "../../links";
 import ButtonLink from "./ButtonLink.astro";
@@ -11,6 +12,10 @@ const { class: className } = Astro.props;
 const t = useTranslations(Astro.currentLocale);
 ---
 
-<ButtonLink href={links.playStore} class={className}>
+<ButtonLink
+  href={links.playStore}
+  class:list={["flex items-center justify-center gap-3", className]}
+>
+  <GooglePlay aria-hidden="true" class="size-5 shrink-0 md:size-6" />
   {t("download.cta")}
 </ButtonLink>
