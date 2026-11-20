@@ -60,6 +60,10 @@ To add a language, add its JSON file and register it in `src/i18n/utils.ts` and 
 
 The site is not indexed on purpose for now: `src/layouts/Layout.astro` sets `noindex, nofollow`. Remove that tag when it should show up in search engines.
 
+## Acknowledgements
+
+Special thanks to [Berta Pasamontes](https://www.linkedin.com/in/berta-pasamontes/), who didn't design Fort but has been a big help with everything related to UX and UI.
+
 ## License
 
 All rights reserved. See [the license page](https://fort.marcel14.dev/license/) or `src/license.txt`.
