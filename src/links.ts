@@ -2,7 +2,6 @@ export const authorName = "Marcel Esplugas";
 
 export const contactEmail = "contact.marcelesplu@gmail.com";
 
-// TODO: fill in before publishing.
 export const links = {
   playStore: "https://play.google.com/store/apps/details?id=com.marcelesplu.fort",
   repo: "https://github.com/JacobsM14/fort-mobile",
