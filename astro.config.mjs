@@ -1,9 +1,19 @@
 // @ts-check
 import { defineConfig, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
+import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://fort.marcel14.dev",
+  integrations: [
+    sitemap({
+      filter: (page) => !page.endsWith("/404/"),
+      i18n: {
+        defaultLocale: "en",
+        locales: { en: "en", es: "es", ca: "ca" },
+      },
+    }),
+  ],
   fonts: [
     {
       provider: fontProviders.fontsource(),

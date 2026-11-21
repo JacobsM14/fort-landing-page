@@ -52,8 +52,6 @@ const otherLangs = (Object.keys(languages) as Lang[]).filter(
     <Font cssVariable="--font-jetbrains-mono" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <!-- TODO: remove once the site is ready to be indexed. Don't block it in robots.txt instead: crawlers would never see this tag. -->
-    <meta name="robots" content="noindex, nofollow" />
     {
       canonical && (
         <>
