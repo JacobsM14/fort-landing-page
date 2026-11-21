@@ -85,7 +85,8 @@ const screenshotClasses = [
           src={screenshot[lang]}
           alt={t(screenshotAlt)}
           width={288}
-          densities={[1, 2]}
+          widths={[240, 320, 480, 576]}
+          sizes="(min-width: 1280px) 288px, (min-width: 1024px) 240px, (min-width: 768px) 288px, (min-width: 640px) 224px, 160px"
           class:list={["block drop-shadow-2xl", screenshotClasses[index]]}
         />
       ))

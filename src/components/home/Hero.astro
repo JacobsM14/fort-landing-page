@@ -58,7 +58,8 @@ const corners = [
       src={screenshots[lang]}
       alt={t("hero.screenshotAlt")}
       width={290}
-      densities={[1, 2]}
+      widths={[290, 400, 580]}
+      sizes="(min-width: 640px) 290px, 224px"
       loading="eager"
       fetchpriority="high"
     />
